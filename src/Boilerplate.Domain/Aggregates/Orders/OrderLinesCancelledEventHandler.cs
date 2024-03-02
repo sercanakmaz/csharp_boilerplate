@@ -1,13 +1,21 @@
 using System.Threading.Tasks;
-using Boilerplate.Domain.Events.Orders;
+using Boilerplate.Domain.Aggregates.OrderLines;
+using Boilerplate.Domain.Events.OrderLines;
 using Boilerplate.Infrastructure.Domain;
+using MongoDB.Bson;
+using Created = Boilerplate.Domain.Events.Orders.Created;
 
 namespace Boilerplate.Domain.Aggregates.Orders;
 
-public class OrderLinesCancelledEventHandler: BaseEventHandler<Created>
+public class OrderLinesCancelledEventHandler(
+    IOrderService orderService,
+    IOrderLineRepository orderLineRepository): BaseEventHandler<Cancelled>
 {
-    protected override Task OnHandle(Created @event)
+    
+    protected override async Task OnHandle(Cancelled @event)
     {
-        throw new System.NotImplementedException();
+        var orderLine = await orderLineRepository.FindById(ObjectId.Parse(@event.Id));
+        
+        await orderService.Complete(orderLine.OrderNumber, OrderCompleteReasons.Cancelled);
     }
 }

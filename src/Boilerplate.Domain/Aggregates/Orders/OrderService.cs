@@ -13,25 +13,19 @@ public interface IOrderService
     Task<List<Order>> GetByUserId(string userId);
     Task<Order> Create(string orderNumber, string userId);
     Task<Order> GetById(string id);
+    Task<Order> Complete(string orderNumber, string completeReason);
 }
 
-public class OrderService: IOrderService
+public class OrderService(IOrderRepository orderRepository) : IOrderService
 {
-    private readonly IOrderRepository _OrderRepository;
-
-    public OrderService(IOrderRepository OrderRepository)
-    {
-        _OrderRepository = OrderRepository;
-    }
-
     public async Task<Order> GetById(string id)
     {
-        return await _OrderRepository.FindById(id.ToObjectId());
+        return await orderRepository.FindById(id.ToObjectId());
     }
     
     public async Task<List<Order>> GetByUserId(string userId)
     {
-        var orders = await _OrderRepository.GetByUserId(userId);
+        var orders = await orderRepository.GetByUserId(userId);
 
         return orders;
     }
@@ -40,7 +34,19 @@ public class OrderService: IOrderService
     {
         var order = new Order(orderNumber, userId);
         
-        await _OrderRepository.InsertAsync(order);
+        await orderRepository.InsertAsync(order);
+        
+        return order;
+    }
+    
+
+    public async Task<Order> Complete(string orderNumber, string completeReason)
+    {
+        var order = await orderRepository.GetByOrderNumber(orderNumber);
+
+        order.Complete(OrderCompleteReasons.Cancelled);
+
+        await orderRepository.ReplaceOneAsync(order);
         
         return order;
     }

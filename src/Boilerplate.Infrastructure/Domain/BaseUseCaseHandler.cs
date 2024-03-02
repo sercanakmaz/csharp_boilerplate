@@ -15,9 +15,37 @@ public abstract class BaseUseCaseHandler<TUseCase, TUseCaseResultContent>(
 
     public async Task<UseCaseResult<TUseCaseResultContent>> Handle(TUseCase useCase)
     {
+        var middlewares = serviceProvider.GetServices<IUseCaseHandlerMiddleware>().ToList();
+
+        foreach (var middleware in middlewares)
+        {
+            middleware.Before(useCase);
+        }
+        
         var result = await OnHandle(useCase);
 
+        foreach (var middleware in middlewares)
+        {
+            middleware.After(useCase, result);
+        }
+        
         DispatchEvents();
+
+        var eventDispatcher = serviceProvider.GetService<IEventDispatcher>();
+
+        if (eventDispatcher != null)
+        {
+            while (true)
+            {
+                var @event = eventContext.TakeDispatched();
+                if (@event == null)
+                {
+                    break;
+                }
+
+                await eventDispatcher.Publish(@event);
+            }
+        }
 
         return result;
     }
@@ -36,7 +64,8 @@ public abstract class BaseUseCaseHandler<TUseCase, TUseCaseResultContent>(
 
             var eventHandlers = serviceProvider
                 .GetServices(baseEventHandlerType)
-                .Cast<IEventHandler>();
+                .Cast<IEventHandler>()
+                .ToList();
 
             foreach (var eventHandler in eventHandlers)
             {

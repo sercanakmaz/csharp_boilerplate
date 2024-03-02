@@ -8,8 +8,4 @@
       <ProjectReference Include="..\Boilerplate.Infrastructure\Boilerplate.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Aggregates\" />
-    </ItemGroup>
-
 </Project>

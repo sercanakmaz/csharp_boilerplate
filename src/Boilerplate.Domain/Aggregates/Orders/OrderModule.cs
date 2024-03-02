@@ -1,3 +1,4 @@
+using Boilerplate.Domain.Events.OrderLines;
 using Boilerplate.Domain.Events.Orders;
 using Boilerplate.Infrastructure.Domain;
 using Boilerplate.Infrastructure.Persistence;
@@ -12,7 +13,7 @@ public static class OrderModule
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IRepository, OrderRepository>();
-        services.AddSingleton<BaseEventHandler<Created>, OrderLinesCancelledEventHandler>();
+        services.AddScoped<BaseEventHandler<Cancelled>, OrderLinesCancelledEventHandler>();
 
         return services;
     }

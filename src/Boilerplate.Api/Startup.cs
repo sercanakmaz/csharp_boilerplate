@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Boilerplate.Api.Application;
+using Boilerplate.Domain.Aggregates.OrderLines;
 using Boilerplate.Domain.Aggregates.Orders;
 using Boilerplate.Infrastructure.Domain;
 using Boilerplate.Infrastructure.Exceptions;
@@ -48,9 +50,9 @@ namespace Boilerplate.Api
 
             services.AddMiddlewareModule()
                 .AddMongoModule(Configuration)
-                .AddOrdersModule();
-
-            services.AddScoped<EventContext>();
+                .AddOrdersModule()
+                .AddOrderLinesModule()
+                .AddUseCasesModule();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

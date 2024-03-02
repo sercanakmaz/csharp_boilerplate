@@ -12,6 +12,7 @@ namespace  Boilerplate.Domain.Aggregates.Orders;
 public interface IOrderRepository : IRepository<Order>
 {
     Task<List<Order>> GetByUserId(string userId);
+    Task<Order> GetByOrderNumber(string orderNumber);
 }
 
 public class OrderRepository(
@@ -29,5 +30,10 @@ public class OrderRepository(
     public Task<List<Order>> GetByUserId(string userId)
     {
         return base.FindAsync(p => p.UserId == userId);
+    }
+
+    public Task<Order> GetByOrderNumber(string orderNumber)
+    {
+        return base.FindOneAsync(p => p.OrderNumber == orderNumber);
     }
 }
