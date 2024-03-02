@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Api", "src\Boilerplate.Api\Boilerplate.Api.csproj", "{C909FF44-22BE-44B7-A8DF-AE7814E86FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Domain", "src\Boilerplate.Domain\Boilerplate.Domain.csproj", "{981D4892-EF79-4A95-B4D0-08BA71128A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Infrastructure", "src\Boilerplate.Infrastructure\Boilerplate.Infrastructure.csproj", "{45320CAE-64ED-494F-A165-EA3CFF6DC300}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C909FF44-22BE-44B7-A8DF-AE7814E86FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C909FF44-22BE-44B7-A8DF-AE7814E86FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C909FF44-22BE-44B7-A8DF-AE7814E86FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C909FF44-22BE-44B7-A8DF-AE7814E86FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{981D4892-EF79-4A95-B4D0-08BA71128A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{981D4892-EF79-4A95-B4D0-08BA71128A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{981D4892-EF79-4A95-B4D0-08BA71128A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{981D4892-EF79-4A95-B4D0-08BA71128A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45320CAE-64ED-494F-A165-EA3CFF6DC300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45320CAE-64ED-494F-A165-EA3CFF6DC300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45320CAE-64ED-494F-A165-EA3CFF6DC300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45320CAE-64ED-494F-A165-EA3CFF6DC300}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
