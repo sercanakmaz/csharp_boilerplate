@@ -36,7 +36,7 @@ public sealed class EventContext
                 return null;
             }
             
-            _dispatchedEvents.Remove(result);
+            _raisedEvents.Remove(result);
 
             return result;
         }

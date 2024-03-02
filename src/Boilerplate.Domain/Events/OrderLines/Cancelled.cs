@@ -9,4 +9,5 @@ public class Cancelled: IEvent
     public string Id { get; set; }
     public DateTime UpdatedDate { get; set; }
     public string Status { get;  set; }
+    public string Reason { get;  set; }
 }

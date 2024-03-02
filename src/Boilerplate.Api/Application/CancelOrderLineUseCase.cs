@@ -8,7 +8,7 @@ namespace Boilerplate.Api.Application;
 
 public class CancelOrderLineUseCase : BaseUseCase
 {
-    [FromRoute] public string Id { get; set; }
+    public string Id { get; set; }
     public string CancellationReason { get; set; }
 }
 
@@ -20,7 +20,7 @@ public class CancelOrderLineUseCaseHandler(
 {
     protected override async Task<UseCaseResult<bool>> OnHandle(CancelOrderLineUseCase useCase)
     {
-        await orderLineService.Cancel(useCase.Id);
+        await orderLineService.Cancel(useCase.Id, useCase.CancellationReason);
         
         return UseCaseResult.FromContent(true);
     }

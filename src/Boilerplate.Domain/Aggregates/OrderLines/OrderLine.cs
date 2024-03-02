@@ -10,7 +10,7 @@ namespace Boilerplate.Domain.Aggregates.OrderLines;
 
 public sealed class OrderLine : Entity
 {
-    private OrderLine()
+    public OrderLine()
     {
     }
 
@@ -35,15 +35,18 @@ public sealed class OrderLine : Entity
     public decimal Price { get; private set; }
     public string OrderNumber { get; private set; }
     public string Status { get; private set; }
+    public string CancelletionReason { get; private set; }
 
-    public void Cancel()
+    public void Cancel(string cancellationReason)
     {
         Status = OrderLineStatuses.Cancelled;
+        CancelletionReason = cancellationReason;
 
         this.RaiseEvent(new Cancelled
         {
             Id = Id.ToString(),
-            Status = this.Status
+            Status = this.Status,
+            Reason = cancellationReason
         });
     }
 }

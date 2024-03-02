@@ -14,8 +14,10 @@ namespace Boilerplate.Api.Controllers
     public class OrderLinesController(CancelOrderLineUseCaseHandler cancelOrderLineUseCaseHandler) : ControllerBase
     {
         [HttpPut("{id}/cancel")]
-        public async Task<IActionResult> Cancel(CancelOrderLineUseCase useCase)
+        public async Task<IActionResult> Cancel([FromRoute] string id,  [FromBody]CancelOrderLineUseCase useCase)
         {
+            useCase.Id = id;
+            
             await cancelOrderLineUseCaseHandler.Handle(useCase);
 
             return this.NoContent();

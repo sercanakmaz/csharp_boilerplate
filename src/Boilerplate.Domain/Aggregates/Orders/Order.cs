@@ -13,7 +13,7 @@ namespace Boilerplate.Domain.Aggregates.Orders;
 
 public sealed class Order : Entity
 {
-    private Order()
+    public Order()
     {
     }
 

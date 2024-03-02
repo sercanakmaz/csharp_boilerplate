@@ -13,7 +13,7 @@ namespace  Boilerplate.Domain.Aggregates.OrderLines;
 public interface IOrderLineService
 {
     Task<OrderLine> Create(string sku, decimal price, string orderNumber);
-    Task Cancel(string id);
+    Task Cancel(string id, string reason);
 }
 
 public class OrderLineService(IOrderLineRepository orderLineRepository) : IOrderLineService
@@ -27,11 +27,11 @@ public class OrderLineService(IOrderLineRepository orderLineRepository) : IOrder
         return order;
     }
 
-    public async Task Cancel(string id)
+    public async Task Cancel(string id, string reason)
     {
         var orderLine = await orderLineRepository.FindById(ObjectId.Parse(id));
 
-        orderLine.Cancel();
+        orderLine.Cancel(reason);
 
         await orderLineRepository.ReplaceOneAsync(orderLine);
     }

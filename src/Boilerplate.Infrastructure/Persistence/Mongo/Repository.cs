@@ -138,6 +138,8 @@ namespace Boilerplate.Infrastructure.Persistence.Mongo
 
                 throw;
             }
+            
+            DispatchDomainEvents(entity);
         }
 
         public abstract Task CreateIndexes();

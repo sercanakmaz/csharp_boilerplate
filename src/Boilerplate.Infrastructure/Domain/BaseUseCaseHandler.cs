@@ -60,7 +60,7 @@ public abstract class BaseUseCaseHandler<TUseCase, TUseCaseResultContent>(
                 break;
             }
 
-            var baseEventHandlerType = typeof(EventHandler<>).MakeGenericType(@event.GetType());
+            var baseEventHandlerType = typeof(BaseEventHandler<>).MakeGenericType(@event.GetType());
 
             var eventHandlers = serviceProvider
                 .GetServices(baseEventHandlerType)
